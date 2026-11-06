@@ -60,6 +60,9 @@ var (
 	ItemKindChecklistItem3 ItemKind = "ChecklistItem3"
 	// ItemKindTask identifies a Task or Subtask
 	ItemKindTask      ItemKind = "Task6"
+	// ItemKindTask7 is the task record written by current Things clients.
+	// It uses the same payload as Task6. Writes from this server stay Task6.
+	ItemKindTask7     ItemKind = "Task7"
 	ItemKindTask4     ItemKind = "Task4"
 	ItemKindTask3     ItemKind = "Task3"
 	ItemKindTaskPlain ItemKind = "Task"

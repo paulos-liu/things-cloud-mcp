@@ -495,11 +495,29 @@ func TestStateUpdateRejectsMalformedKnownItem(t *testing.T) {
 	}
 }
 
+func TestStateUpdateAcceptsTask7(t *testing.T) {
+	s := NewState()
+	payload := []byte(`{"tt":"Repeating to-do","tp":0}`)
+	err := s.Update(things.Item{
+		UUID:   "task7-item",
+		Kind:   things.ItemKindTask7,
+		Action: things.ItemActionCreated,
+		P:      payload,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	task := s.Tasks["task7-item"]
+	if task == nil || task.Title != "Repeating to-do" {
+		t.Fatalf("Task7 was not stored: %#v", task)
+	}
+}
+
 func TestStateUpdateRejectsUnknownKind(t *testing.T) {
 	s := NewState()
 	err := s.Update(things.Item{
 		UUID:   "future-item",
-		Kind:   things.ItemKind("Task7"),
+		Kind:   things.ItemKind("SomeFutureKind"),
 		Action: things.ItemActionCreated,
 		P:      []byte(`{}`),
 	})
